@@ -17,6 +17,19 @@ def get_random_quote():
     except:
         return {"content": "Error connecting to API.", "author": "System"}
 
+def get_random_quote():
+    try:
+        response = requests.get("https://zenquotes.io/api/random")
+        data = response.json()[0]
+        return {
+            "content": data["q"],
+            "author": data["a"]
+        }
+    except:
+        return {"content": "Life is what happens when you're busy making other plans.", "author": "John Lennon"}
+
+
+
 @app.route("/")
 def home():
     quote = get_random_quote()
